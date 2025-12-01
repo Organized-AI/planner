@@ -75,6 +75,44 @@
 .dark .text-gray-400{color:#9ca3af}
 .dark .border-indigo-200{border-color:#4338ca}
 .dark .bg-gray-700{background-color:#1f2937}
+
+/* Tabs */
+.tabs{display:flex;gap:8px;margin-bottom:20px}
+.tab{flex:1;padding:12px;background:rgba(99,102,241,0.1);border:none;border-radius:8px;color:#6366f1;cursor:pointer;font-size:0.9rem;font-weight:500;transition:all 0.3s}
+.tab.active{background:#6366f1;color:white;font-weight:600}
+.tab:hover:not(.active){background:rgba(99,102,241,0.2)}
+.dark .tab{background:rgba(99,102,241,0.2);color:#a5b4fc}
+.dark .tab.active{background:#6366f1;color:white}
+.dark .tab:hover:not(.active){background:rgba(99,102,241,0.3)}
+.panel{display:none}
+.panel.active{display:block}
+
+/* Study Panel Styles */
+.study-table{width:100%;border-collapse:collapse;margin-top:12px}
+.study-table th,.study-table td{padding:10px;text-align:left;border-bottom:1px solid #e5e7eb}
+.study-table th{background:#f3f4f6;color:#6366f1;font-weight:600}
+.study-table tr:hover{background:#f9fafb}
+.study-table .today-row{background:#dcfce7;font-weight:600}
+.dark .study-table th{background:#374151;color:#a5b4fc}
+.dark .study-table td{color:#d1d5db;border-bottom-color:#374151}
+.dark .study-table tr:hover{background:#374151}
+.dark .study-table .today-row{background:#14532d}
+.quick-links{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px}
+.quick-link{display:block;padding:16px;background:#f3f4f6;border-radius:8px;text-decoration:none;color:#374151;text-align:center;transition:all 0.3s}
+.quick-link:hover{background:#6366f1;color:white;transform:translateY(-2px)}
+.quick-link .icon{font-size:1.5rem;margin-bottom:8px}
+.dark .quick-link{background:#374151;color:#d1d5db}
+.dark .quick-link:hover{background:#6366f1;color:white}
+
+/* Timer Panel Styles */
+.timer-container{background:linear-gradient(135deg,#1e1b4b 0%,#312e81 100%);color:white;border-radius:12px;padding:24px;text-align:center;margin-bottom:16px}
+.timer-display{font-size:3.5rem;font-family:monospace;margin:16px 0;font-weight:bold}
+.timer-buttons{display:flex;gap:12px;justify-content:center}
+.timer-btn{padding:12px 24px;border:none;border-radius:8px;cursor:pointer;font-size:1rem;font-weight:600;transition:transform 0.2s}
+.timer-btn:hover{transform:scale(1.05)}
+.timer-btn.start{background:#22c55e;color:white}
+.timer-btn.stop{background:#ef4444;color:white}
+.timer-btn.reset{background:#6b7280;color:white}
     </style>
 </head>
 <body class="bg-gray-50 min-h-screen dark">
@@ -112,6 +150,16 @@
                 </div>
             </div>
         </header>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab active" onclick="showPanel('planner')">📋 Planner</button>
+            <button class="tab" onclick="showPanel('study')">📚 Study</button>
+            <button class="tab" onclick="showPanel('timer-tab')">⏱️ Timer</button>
+        </div>
+
+        <!-- Planner Panel (Main Content) -->
+        <div id="planner" class="panel active">
 
         <!-- Daily Energy Flow -->
         <section class="mb-8 bg-white rounded-xl p-6 shadow-sm border border-gray-100">
@@ -161,6 +209,81 @@
             <h2 class="text-lg font-semibold mb-2">💭 Week Intention</h2>
             <p class="text-indigo-100" id="week-intention">Complete Gauntlet application and establish the sGTM skill foundation. Success = application submitted + RTT tracking framework documented + Miracle Academy auth fixed.</p>
         </section>
+
+        </div><!-- End Planner Panel -->
+
+        <!-- Study Panel -->
+        <div id="study" class="panel">
+            <section class="mb-8 bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+                <h2 class="text-lg font-semibold text-gray-800 mb-4">📚 Evening Study Schedule</h2>
+                <table class="study-table">
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>Hours</th>
+                            <th>Focus</th>
+                            <th>Platform</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studyScheduleTable"></tbody>
+                </table>
+            </section>
+
+            <section class="mb-8 bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+                <h2 class="text-lg font-semibold text-gray-800 mb-4">🔗 Quick Access</h2>
+                <div class="quick-links">
+                    <a href="https://scrimba.com/the-backend-developer-path-c0tbi0l98f" target="_blank" class="quick-link">
+                        <div class="icon">🎬</div>
+                        <div>Scrimba</div>
+                    </a>
+                    <a href="https://www.datacamp.com" target="_blank" class="quick-link">
+                        <div class="icon">📊</div>
+                        <div>DataCamp</div>
+                    </a>
+                    <a href="https://roadmap.sh/backend" target="_blank" class="quick-link">
+                        <div class="icon">🗺️</div>
+                        <div>Backend</div>
+                    </a>
+                    <a href="https://roadmap.sh/python" target="_blank" class="quick-link">
+                        <div class="icon">🐍</div>
+                        <div>Python</div>
+                    </a>
+                    <a href="https://roadmap.sh/system-design" target="_blank" class="quick-link">
+                        <div class="icon">🏗️</div>
+                        <div>System Design</div>
+                    </a>
+                    <a href="https://roadmap.sh/api-design" target="_blank" class="quick-link">
+                        <div class="icon">🔌</div>
+                        <div>API Design</div>
+                    </a>
+                </div>
+            </section>
+
+            <section class="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl p-6 text-white">
+                <h2 class="text-lg font-semibold mb-2">🎯 Today's Study Focus</h2>
+                <p class="text-indigo-100" id="todayStudyFocus">Loading...</p>
+            </section>
+        </div><!-- End Study Panel -->
+
+        <!-- Timer Panel -->
+        <div id="timer-tab" class="panel">
+            <div class="timer-container">
+                <h3 class="text-xl font-semibold mb-2">⏱️ Focus Timer</h3>
+                <div class="timer-display" id="focusTimerDisplay">00:00:00</div>
+                <div id="focusTimerTask" style="margin-bottom: 16px; opacity: 0.8;">No task selected</div>
+                <div class="timer-buttons">
+                    <button class="timer-btn start" onclick="startFocusTimer()">▶️ Start</button>
+                    <button class="timer-btn stop" onclick="stopFocusTimer()">⏸️ Pause</button>
+                    <button class="timer-btn reset" onclick="resetFocusTimer()">🔄 Reset</button>
+                </div>
+            </div>
+
+            <section class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+                <h2 class="text-lg font-semibold text-gray-800 mb-4">📊 Today's Time Log</h2>
+                <div id="focusTimeLog" class="text-gray-600">No time logged yet</div>
+            </section>
+        </div><!-- End Timer Panel -->
+
     </div>
 
     <script>
@@ -590,6 +713,86 @@
             renderLearning();
             updateProgress();
         }
+
+        // Tab Switching
+        function showPanel(panelId) {
+            document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.getElementById(panelId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Study Schedule Data
+        const studyScheduleData = [
+            { day: 'Monday', hours: '1-1.5', focus: 'Python Foundations', platform: 'DataCamp → Roadmap.sh' },
+            { day: 'Tuesday', hours: '1-1.5', focus: 'Backend Architecture', platform: 'Roadmap.sh → Scrimba' },
+            { day: 'Wednesday', hours: '1.5', focus: 'Next.js + Node.js', platform: 'Scrimba (focused)' },
+            { day: 'Thursday', hours: '1-1.5', focus: 'Data & Databases', platform: 'DataCamp → Scrimba' },
+            { day: 'Friday', hours: '2', focus: 'Integration & Review', platform: 'Mixed + Strategic' },
+            { day: 'Saturday', hours: 'Optional', focus: 'Deep Dive Projects', platform: 'Scrimba projects' },
+            { day: 'Sunday', hours: 'Optional', focus: 'Week Planning', platform: 'Claude + Planning' }
+        ];
+
+        function renderStudySchedule() {
+            const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
+            const tbody = document.getElementById('studyScheduleTable');
+            if (!tbody) return;
+
+            tbody.innerHTML = studyScheduleData.map(row => `
+                <tr class="${row.day === today ? 'today-row' : ''}">
+                    <td><strong>${row.day}</strong></td>
+                    <td>${row.hours}</td>
+                    <td>${row.focus}</td>
+                    <td>${row.platform}</td>
+                </tr>
+            `).join('');
+
+            // Update today's study focus
+            const todayStudy = studyScheduleData.find(s => s.day === today);
+            const focusEl = document.getElementById('todayStudyFocus');
+            if (todayStudy && focusEl) {
+                focusEl.innerHTML = `<strong>${todayStudy.focus}</strong> - ${todayStudy.platform}`;
+            }
+        }
+
+        // Focus Timer (Tab version)
+        let focusTimerInterval = null;
+        let focusTimerSeconds = parseInt(localStorage.getItem('focusTimerSeconds') || '0');
+
+        function startFocusTimer() {
+            if (focusTimerInterval) return;
+            focusTimerInterval = setInterval(() => {
+                focusTimerSeconds++;
+                updateFocusTimerDisplay();
+                localStorage.setItem('focusTimerSeconds', focusTimerSeconds);
+            }, 1000);
+        }
+
+        function stopFocusTimer() {
+            clearInterval(focusTimerInterval);
+            focusTimerInterval = null;
+        }
+
+        function resetFocusTimer() {
+            stopFocusTimer();
+            focusTimerSeconds = 0;
+            updateFocusTimerDisplay();
+            localStorage.setItem('focusTimerSeconds', '0');
+        }
+
+        function updateFocusTimerDisplay() {
+            const hrs = Math.floor(focusTimerSeconds / 3600);
+            const mins = Math.floor((focusTimerSeconds % 3600) / 60);
+            const secs = focusTimerSeconds % 60;
+            const display = document.getElementById('focusTimerDisplay');
+            if (display) {
+                display.textContent = `${hrs.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            }
+        }
+
+        // Initialize study schedule and focus timer on load
+        renderStudySchedule();
+        updateFocusTimerDisplay();
 
         // Dark Mode
         function toggleDarkMode() {
