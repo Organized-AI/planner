@@ -1,0 +1,26 @@
+{
+  "name": "weekly-planner-pwa",
+  "version": "1.0.0",
+  "description": "",
+  "main": "sw.js",
+  "scripts": {
+    "dev": "wrangler pages dev .",
+    "deploy": "wrangler pages deploy .",
+    "login": "wrangler login"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Organized-AI/planner.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Organized-AI/planner/issues"
+  },
+  "homepage": "https://github.com/Organized-AI/planner#readme",
+  "devDependencies": {
+    "wrangler": "^4.51.0"
+  }
+}
