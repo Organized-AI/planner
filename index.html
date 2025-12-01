@@ -600,8 +600,8 @@
 
         function initDarkMode() {
             const savedMode = localStorage.getItem('darkMode');
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            const shouldBeDark = savedMode === 'true' || (savedMode === null && prefersDark);
+            // Default to dark mode if no preference saved
+            const shouldBeDark = savedMode !== 'false';
 
             if (shouldBeDark) {
                 document.body.classList.add('dark');
